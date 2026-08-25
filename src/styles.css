@@ -5,17 +5,18 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Design system definition.
+ * THINK TN FOUNDATION — DESIGN SYSTEM
+ * ----------------------------------------------------------------------------
+ * Palette per Website Strategy v1.0 §5. Three Tamil colours, each mapped to a
+ * confidence tag: mayil teal [A], indigo ink [B], manjal gold [C].
  *
- * The @theme inline block maps CSS custom properties to Tailwind utility
- * classes (e.g. --color-primary -> bg-primary, text-primary).
+ * The site is DARK-FIRST (night #0E1116 base). Light passages are opt-in via
+ * the .surface-cream scope, which re-declares the same semantic tokens, so
+ * every component adapts without a single hardcoded colour class.
  *
- * The :root and .dark blocks define the actual color values using oklch.
- * All colors MUST use oklch format.
- *
- * To add a new semantic color:
- * 1. Add the variable to :root (light value) and .dark (dark value)
- * 2. Register it in @theme inline as --color-<name>: var(--<name>)
+ * THE GOLD RULE: manjal gold never carries text on a light background.
+ * On cream, gold is a fill or a rule only. Enforced by token separation:
+ * .surface-cream maps --accent-foreground to ink, never the reverse.
  */
 
 @theme inline {
@@ -26,6 +27,7 @@
   --radius-2xl: calc(var(--radius) + 8px);
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -46,6 +48,16 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
   --color-ring-offset-background: var(--background);
+
+  /* Brand constants — never re-mapped by a surface scope */
+  --color-mayil: var(--mayil);
+  --color-indigo: var(--indigo);
+  --color-manjal: var(--manjal);
+  --color-olai: var(--olai);
+  --color-ink: var(--ink);
+  --color-night: var(--night);
+  --color-slate: var(--slate);
+
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
@@ -59,77 +71,152 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+
+  --font-display: "Anek Latin", "Anek Tamil", system-ui, sans-serif;
+  --font-serif: "Source Serif 4", "Noto Serif Tamil", Georgia, serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --font-tamil: "Anek Tamil", "Anek Latin", system-ui, sans-serif;
+
+  --text-display: clamp(2.5rem, 1.35rem + 4.6vw, 4.75rem);
+  --text-h1: clamp(2rem, 1.4rem + 2.4vw, 3.25rem);
+  --text-h2: clamp(1.625rem, 1.3rem + 1.3vw, 2.25rem);
+  --text-h3: clamp(1.25rem, 1.15rem + 0.4vw, 1.5rem);
+  --text-lead: clamp(1.125rem, 1.05rem + 0.35vw, 1.375rem);
+  --text-body: clamp(1.0625rem, 1.03rem + 0.12vw, 1.125rem);
+  --text-ui: clamp(0.9375rem, 0.92rem + 0.08vw, 1rem);
+  --text-meta: clamp(0.8125rem, 0.8rem + 0.06vw, 0.875rem);
+  --text-tag: 0.75rem;
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.129 0.042 264.695);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
-  --secondary: oklch(0.968 0.007 247.896);
-  --secondary-foreground: oklch(0.208 0.042 265.755);
-  --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
-  --accent: oklch(0.968 0.007 247.896);
-  --accent-foreground: oklch(0.208 0.042 265.755);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.929 0.013 255.508);
-  --input: oklch(0.929 0.013 255.508);
-  --ring: oklch(0.704 0.04 256.788);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.984 0.003 247.858);
-  --sidebar-foreground: oklch(0.129 0.042 264.695);
-  --sidebar-primary: oklch(0.208 0.042 265.755);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.968 0.007 247.896);
-  --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
-  --sidebar-border: oklch(0.929 0.013 255.508);
-  --sidebar-ring: oklch(0.704 0.04 256.788);
+  --radius: 0.25rem;
+
+  /* Brand constants */
+  --mayil: oklch(0.432 0.062 199.2); /* #0B5A63 */
+  --mayil-light: oklch(0.716 0.079 197.6); /* #4FB3BC */
+  --indigo: oklch(0.28 0.055 267.5); /* #1A2340 */
+  --manjal: oklch(0.673 0.117 76.9); /* #C8912A */
+  --manjal-light: oklch(0.804 0.104 82.6); /* #E3B75C */
+  --olai: oklch(0.977 0.011 91.3); /* #FAF7F0 */
+  --ink: oklch(0.213 0.011 264.4); /* #14171C */
+  --slate: oklch(0.494 0.024 259.6); /* #5A6472 */
+  --night: oklch(0.176 0.011 264.4); /* #0E1116 */
+
+  /* DARK-FIRST semantic tokens (night base) */
+  --background: var(--night);
+  --foreground: var(--olai);
+  --card: oklch(0.223 0.012 264.4);
+  --card-foreground: var(--olai);
+  --popover: oklch(0.223 0.012 264.4);
+  --popover-foreground: var(--olai);
+  --primary: var(--mayil-light);
+  --primary-foreground: var(--night);
+  --secondary: oklch(0.26 0.014 264);
+  --secondary-foreground: var(--olai);
+  --muted: oklch(0.26 0.014 264);
+  --muted-foreground: oklch(0.72 0.018 258);
+  --accent: var(--manjal-light);
+  --accent-foreground: var(--ink);
+  --destructive: oklch(0.62 0.19 25);
+  --destructive-foreground: var(--olai);
+  --border: oklch(0.977 0.011 91.3 / 14%);
+  --input: oklch(0.977 0.011 91.3 / 18%);
+  --ring: var(--mayil-light);
+
+  --chart-1: var(--mayil-light);
+  --chart-2: var(--manjal-light);
+  --chart-3: oklch(0.62 0.06 267.5);
+  --chart-4: oklch(0.72 0.018 258);
+  --chart-5: oklch(0.86 0.03 197);
+
+  --sidebar: var(--indigo);
+  --sidebar-foreground: var(--olai);
+  --sidebar-primary: var(--mayil-light);
+  --sidebar-primary-foreground: var(--night);
+  --sidebar-accent: oklch(0.26 0.014 264);
+  --sidebar-accent-foreground: var(--olai);
+  --sidebar-border: oklch(0.977 0.011 91.3 / 14%);
+  --sidebar-ring: var(--mayil-light);
+
+  --gradient-rule: linear-gradient(
+    90deg,
+    var(--mayil-light) 0%,
+    var(--indigo) 52%,
+    var(--manjal) 100%
+  );
+  --shadow-card: 0 1px 0 0 oklch(0.977 0.011 91.3 / 8%);
+  --ease-institutional: cubic-bezier(0.16, 0.84, 0.24, 1);
 }
 
-.dark {
-  --background: oklch(0.129 0.042 264.695);
-  --foreground: oklch(0.984 0.003 247.858);
-  --card: oklch(0.208 0.042 265.755);
-  --card-foreground: oklch(0.984 0.003 247.858);
-  --popover: oklch(0.208 0.042 265.755);
-  --popover-foreground: oklch(0.984 0.003 247.858);
-  --primary: oklch(0.929 0.013 255.508);
-  --primary-foreground: oklch(0.208 0.042 265.755);
-  --secondary: oklch(0.279 0.041 260.031);
-  --secondary-foreground: oklch(0.984 0.003 247.858);
-  --muted: oklch(0.279 0.041 260.031);
-  --muted-foreground: oklch(0.704 0.04 256.788);
-  --accent: oklch(0.279 0.041 260.031);
-  --accent-foreground: oklch(0.984 0.003 247.858);
-  --destructive: oklch(0.704 0.191 22.216);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.551 0.027 264.364);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.208 0.042 265.755);
-  --sidebar-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.279 0.041 260.031);
-  --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.551 0.027 264.364);
+/* Light passage — palm-leaf cream. 80% cream/ink, 12% teal, 5% indigo, 3% gold. */
+.surface-cream {
+  --background: var(--olai);
+  --foreground: var(--ink);
+  --card: oklch(1 0 0);
+  --card-foreground: var(--ink);
+  --popover: oklch(1 0 0);
+  --popover-foreground: var(--ink);
+  --primary: var(--mayil);
+  --primary-foreground: var(--olai);
+  --secondary: oklch(0.955 0.012 91);
+  --secondary-foreground: var(--ink);
+  --muted: oklch(0.955 0.012 91);
+  --muted-foreground: var(--slate);
+  --accent: var(--manjal);
+  --accent-foreground: var(--ink);
+  --border: oklch(0.213 0.011 264.4 / 14%);
+  --input: oklch(0.213 0.011 264.4 / 20%);
+  --ring: var(--mayil);
+  --chart-1: var(--mayil);
+  --chart-2: var(--manjal);
+  --chart-3: var(--indigo);
+  --chart-4: var(--slate);
+  --shadow-card: 0 1px 0 0 oklch(0.213 0.011 264.4 / 6%);
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+/* Deep indigo panel — the ink of the record. */
+.surface-indigo {
+  --background: var(--indigo);
+  --foreground: var(--olai);
+  --card: oklch(0.32 0.055 267.5);
+  --card-foreground: var(--olai);
+  --primary: var(--mayil-light);
+  --primary-foreground: var(--night);
+  --muted: oklch(0.34 0.05 267.5);
+  --muted-foreground: oklch(0.78 0.02 260);
+  --accent: var(--manjal-light);
+  --accent-foreground: var(--ink);
+  --border: oklch(0.977 0.011 91.3 / 16%);
+  --ring: var(--mayil-light);
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+/* Teal panel — cream on mayil measures 7.39:1. A safe workhorse. */
+.surface-teal {
+  --background: var(--mayil);
+  --foreground: var(--olai);
+  --card: oklch(0.48 0.06 199);
+  --card-foreground: var(--olai);
+  --primary: var(--olai);
+  --primary-foreground: var(--mayil);
+  --muted: oklch(0.48 0.06 199);
+  --muted-foreground: oklch(0.9 0.02 195);
+  --accent: var(--manjal-light);
+  --accent-foreground: var(--ink);
+  --border: oklch(0.977 0.011 91.3 / 24%);
+  --ring: var(--olai);
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+.surface-night {
+  --background: var(--night);
+  --foreground: var(--olai);
+  background-color: var(--background);
+  color: var(--foreground);
 }
 
 @layer base {
@@ -137,8 +224,309 @@
     border-color: var(--color-border);
   }
 
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-display);
+    font-size: var(--text-body);
+    line-height: 1.6;
+    font-synthesis-weight: none;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--mayil-light);
+    color: var(--night);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* Tamil runs taller: +0.1 on every line height. */
+  :lang(ta) {
+    font-family: var(--font-tamil);
+    line-height: 1.75;
+  }
+
+  table {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ---------------------------------------------------------------- TYPOGRAPHY */
+
+@utility u-display {
+  font-family: var(--font-display);
+  font-size: var(--text-display);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.028em;
+  text-wrap: balance;
+}
+
+@utility u-h1 {
+  font-family: var(--font-display);
+  font-size: var(--text-h1);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+@utility u-h2 {
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  font-weight: 600;
+  line-height: 1.18;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+@utility u-h3 {
+  font-family: var(--font-display);
+  font-size: var(--text-h3);
+  font-weight: 600;
+  line-height: 1.28;
+  letter-spacing: -0.005em;
+}
+
+@utility u-lead {
+  font-family: var(--font-serif);
+  font-size: var(--text-lead);
+  font-weight: 400;
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+@utility u-body {
+  font-family: var(--font-serif);
+  font-size: var(--text-body);
+  line-height: 1.62;
+  text-wrap: pretty;
+}
+
+/* Measure 62–72 characters. Long-form only. */
+@utility u-measure {
+  max-width: 66ch;
+}
+
+@utility u-ui {
+  font-family: var(--font-display);
+  font-size: var(--text-ui);
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+@utility u-meta {
+  font-family: var(--font-mono);
+  font-size: var(--text-meta);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+@utility u-num {
+  font-variant-numeric: tabular-nums;
+}
+
+/* THE SIGNATURE: Anek 700 with an italic-serif counterpoint inside it.
+   Hero, section-page headers and the footer line. Nowhere else. */
+@utility u-signature {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.005em;
+}
+
+/* -------------------------------------------------------------------- LAYOUT */
+
+@utility u-container {
+  width: 100%;
+  margin-inline: auto;
+  max-width: 84rem;
+  padding-inline: 1.25rem;
+  @media (width >= 48rem) {
+    padding-inline: 2.5rem;
+  }
+  @media (width >= 80rem) {
+    padding-inline: 4rem;
+  }
+}
+
+@utility u-section {
+  padding-block: clamp(3.5rem, 2rem + 6vw, 7.5rem);
+}
+
+/* The gradient rule: 2px teal → indigo → gold. Once per page at most. */
+@utility u-gradient-rule {
+  height: 2px;
+  width: 100%;
+  border: 0;
+  background: var(--gradient-rule);
+}
+
+@utility u-hairline {
+  border-block-start: 1px solid var(--color-border);
+}
+
+/* ---------------------------------------------------------------- COMPONENTS */
+
+/* Section label: • two words, mono, tracked. */
+@utility u-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3125rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: color-mix(in oklab, var(--color-foreground) 5%, transparent);
+  font-family: var(--font-mono);
+  font-size: var(--text-tag);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-muted-foreground);
+  &::before {
+    content: "";
+    inline-size: 0.375rem;
+    block-size: 0.375rem;
+    border-radius: 999px;
+    background: var(--primary);
+  }
+}
+
+/* Confidence tag chips. The palette IS the epistemics. */
+@utility u-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.125rem 0.4375rem;
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: var(--text-tag);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  white-space: nowrap;
+  border: 1px solid transparent;
+  cursor: help;
+}
+
+@utility u-tag-a {
+  background: var(--mayil);
+  color: var(--olai);
+  border-color: var(--mayil);
+}
+
+@utility u-tag-b {
+  background: transparent;
+  color: currentColor;
+  border-color: color-mix(in oklab, currentColor 45%, transparent);
+}
+
+@utility u-tag-c {
+  background: var(--manjal);
+  color: var(--ink); /* never gold text */
+  border-color: var(--manjal);
+}
+
+@utility u-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: color-mix(in oklab, var(--color-foreground) 3%, transparent);
+  transition:
+    border-color 0.3s var(--ease-institutional),
+    background-color 0.3s var(--ease-institutional),
+    transform 0.3s var(--ease-institutional);
+  &:hover {
+    border-color: color-mix(in oklab, var(--primary) 60%, var(--color-border));
+    background: color-mix(in oklab, var(--color-foreground) 6%, transparent);
+  }
+}
+
+@utility u-arrow-circle {
+  display: inline-grid;
+  place-items: center;
+  inline-size: 2.75rem;
+  block-size: 2.75rem;
+  flex: none;
+  border-radius: 999px;
+  border: 1px solid currentColor;
+  transition:
+    background-color 0.3s var(--ease-institutional),
+    color 0.3s var(--ease-institutional),
+    transform 0.3s var(--ease-institutional);
+}
+
+@utility u-link-underline {
+  text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  transition: background-size 0.3s var(--ease-institutional);
+  &:hover {
+    background-size: 0% 1px;
+  }
+}
+
+@utility u-reveal {
+  animation: tn-reveal 0.7s var(--ease-institutional) both;
+}
+
+@keyframes tn-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Print: officers print. Tags and sources preserved, navigation removed. */
+@media print {
+  .u-noprint {
+    display: none !important;
+  }
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+  details {
+    display: block;
+  }
+  details > summary ~ * {
+    display: revert !important;
+  }
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 10px;
   }
 }
