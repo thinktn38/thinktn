@@ -14,6 +14,7 @@ import { Route as EvidenceIndexRouteImport } from './routes/evidence.index'
 import { Route as EvidenceCorrectionsRouteImport } from './routes/evidence.corrections'
 import { Route as EvidenceMethodsRouteImport } from './routes/evidence.methods'
 import { Route as LadderIndexRouteImport } from './routes/ladder.index'
+import { Route as LadderSlugRouteImport } from './routes/ladder.$slug'
 import { Route as ProgrammesIndexRouteImport } from './routes/programmes.index'
 import { Route as ProgrammesSlugRouteImport } from './routes/programmes.$slug'
 import { Route as EvidencePublicationsIndexRouteImport } from './routes/evidence.publications.index'
@@ -44,6 +45,11 @@ const EvidenceMethodsRoute = EvidenceMethodsRouteImport.update({
 const LadderIndexRoute = LadderIndexRouteImport.update({
   id: '/ladder/',
   path: '/ladder/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LadderSlugRoute = LadderSlugRouteImport.update({
+  id: '/ladder/$slug',
+  path: '/ladder/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProgrammesIndexRoute = ProgrammesIndexRouteImport.update({
@@ -83,6 +89,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/evidence/corrections': typeof EvidenceCorrectionsRoute
   '/evidence/methods': typeof EvidenceMethodsRoute
+  '/ladder/$slug': typeof LadderSlugRoute
   '/programmes/$slug': typeof ProgrammesSlugRoute
   '/evidence/': typeof EvidenceIndexRoute
   '/ladder/': typeof LadderIndexRoute
@@ -96,6 +103,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/evidence/corrections': typeof EvidenceCorrectionsRoute
   '/evidence/methods': typeof EvidenceMethodsRoute
+  '/ladder/$slug': typeof LadderSlugRoute
   '/programmes/$slug': typeof ProgrammesSlugRoute
   '/evidence': typeof EvidenceIndexRoute
   '/ladder': typeof LadderIndexRoute
@@ -110,6 +118,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/evidence/corrections': typeof EvidenceCorrectionsRoute
   '/evidence/methods': typeof EvidenceMethodsRoute
+  '/ladder/$slug': typeof LadderSlugRoute
   '/programmes/$slug': typeof ProgrammesSlugRoute
   '/evidence/': typeof EvidenceIndexRoute
   '/ladder/': typeof LadderIndexRoute
@@ -125,6 +134,7 @@ export interface FileRouteTypes {
     | '/'
     | '/evidence/corrections'
     | '/evidence/methods'
+    | '/ladder/$slug'
     | '/programmes/$slug'
     | '/evidence/'
     | '/ladder/'
@@ -138,6 +148,7 @@ export interface FileRouteTypes {
     | '/'
     | '/evidence/corrections'
     | '/evidence/methods'
+    | '/ladder/$slug'
     | '/programmes/$slug'
     | '/evidence'
     | '/ladder'
@@ -151,6 +162,7 @@ export interface FileRouteTypes {
     | '/'
     | '/evidence/corrections'
     | '/evidence/methods'
+    | '/ladder/$slug'
     | '/programmes/$slug'
     | '/evidence/'
     | '/ladder/'
@@ -165,6 +177,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   EvidenceCorrectionsRoute: typeof EvidenceCorrectionsRoute
   EvidenceMethodsRoute: typeof EvidenceMethodsRoute
+  LadderSlugRoute: typeof LadderSlugRoute
   ProgrammesSlugRoute: typeof ProgrammesSlugRoute
   EvidenceIndexRoute: typeof EvidenceIndexRoute
   LadderIndexRoute: typeof LadderIndexRoute
@@ -210,6 +223,13 @@ declare module '@tanstack/react-router' {
       path: '/ladder'
       fullPath: '/ladder/'
       preLoaderRoute: typeof LadderIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ladder/$slug': {
+      id: '/ladder/$slug'
+      path: '/ladder/$slug'
+      fullPath: '/ladder/$slug'
+      preLoaderRoute: typeof LadderSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/programmes/': {
@@ -261,6 +281,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   EvidenceCorrectionsRoute: EvidenceCorrectionsRoute,
   EvidenceMethodsRoute: EvidenceMethodsRoute,
+  LadderSlugRoute: LadderSlugRoute,
   ProgrammesSlugRoute: ProgrammesSlugRoute,
   EvidenceIndexRoute: EvidenceIndexRoute,
   LadderIndexRoute: LadderIndexRoute,
