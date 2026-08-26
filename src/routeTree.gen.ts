@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as EvidenceIndexRouteImport } from './routes/evidence.index'
+import { Route as EvidenceCorrectionsRouteImport } from './routes/evidence.corrections'
 import { Route as EvidenceMethodsRouteImport } from './routes/evidence.methods'
 import { Route as EvidencePublicationsIndexRouteImport } from './routes/evidence.publications.index'
 import { Route as EvidencePublicationsSlugRouteImport } from './routes/evidence.publications.$slug'
@@ -25,6 +26,11 @@ const IndexRoute = IndexRouteImport.update({
 const EvidenceIndexRoute = EvidenceIndexRouteImport.update({
   id: '/evidence/',
   path: '/evidence/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EvidenceCorrectionsRoute = EvidenceCorrectionsRouteImport.update({
+  id: '/evidence/corrections',
+  path: '/evidence/corrections',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EvidenceMethodsRoute = EvidenceMethodsRouteImport.update({
@@ -57,6 +63,7 @@ const EvidenceTrackersSlugRoute = EvidenceTrackersSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/evidence/corrections': typeof EvidenceCorrectionsRoute
   '/evidence/methods': typeof EvidenceMethodsRoute
   '/evidence/': typeof EvidenceIndexRoute
   '/evidence/publications/$slug': typeof EvidencePublicationsSlugRoute
@@ -66,6 +73,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/evidence/corrections': typeof EvidenceCorrectionsRoute
   '/evidence/methods': typeof EvidenceMethodsRoute
   '/evidence': typeof EvidenceIndexRoute
   '/evidence/publications/$slug': typeof EvidencePublicationsSlugRoute
@@ -76,6 +84,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/evidence/corrections': typeof EvidenceCorrectionsRoute
   '/evidence/methods': typeof EvidenceMethodsRoute
   '/evidence/': typeof EvidenceIndexRoute
   '/evidence/publications/$slug': typeof EvidencePublicationsSlugRoute
@@ -87,6 +96,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/evidence/corrections'
     | '/evidence/methods'
     | '/evidence/'
     | '/evidence/publications/$slug'
@@ -96,6 +106,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/evidence/corrections'
     | '/evidence/methods'
     | '/evidence'
     | '/evidence/publications/$slug'
@@ -105,6 +116,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/evidence/corrections'
     | '/evidence/methods'
     | '/evidence/'
     | '/evidence/publications/$slug'
@@ -115,6 +127,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  EvidenceCorrectionsRoute: typeof EvidenceCorrectionsRoute
   EvidenceMethodsRoute: typeof EvidenceMethodsRoute
   EvidenceIndexRoute: typeof EvidenceIndexRoute
   EvidencePublicationsSlugRoute: typeof EvidencePublicationsSlugRoute
@@ -137,6 +150,13 @@ declare module '@tanstack/react-router' {
       path: '/evidence'
       fullPath: '/evidence/'
       preLoaderRoute: typeof EvidenceIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/evidence/corrections': {
+      id: '/evidence/corrections'
+      path: '/evidence/corrections'
+      fullPath: '/evidence/corrections'
+      preLoaderRoute: typeof EvidenceCorrectionsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/evidence/methods': {
@@ -179,6 +199,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  EvidenceCorrectionsRoute: EvidenceCorrectionsRoute,
   EvidenceMethodsRoute: EvidenceMethodsRoute,
   EvidenceIndexRoute: EvidenceIndexRoute,
   EvidencePublicationsSlugRoute: EvidencePublicationsSlugRoute,
