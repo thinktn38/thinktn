@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as EvidenceIndexRouteImport } from './routes/evidence.index'
 import { Route as EvidenceCorrectionsRouteImport } from './routes/evidence.corrections'
 import { Route as EvidenceMethodsRouteImport } from './routes/evidence.methods'
+import { Route as LadderIndexRouteImport } from './routes/ladder.index'
 import { Route as ProgrammesIndexRouteImport } from './routes/programmes.index'
 import { Route as ProgrammesSlugRouteImport } from './routes/programmes.$slug'
 import { Route as EvidencePublicationsIndexRouteImport } from './routes/evidence.publications.index'
@@ -38,6 +39,11 @@ const EvidenceCorrectionsRoute = EvidenceCorrectionsRouteImport.update({
 const EvidenceMethodsRoute = EvidenceMethodsRouteImport.update({
   id: '/evidence/methods',
   path: '/evidence/methods',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LadderIndexRoute = LadderIndexRouteImport.update({
+  id: '/ladder/',
+  path: '/ladder/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProgrammesIndexRoute = ProgrammesIndexRouteImport.update({
@@ -79,6 +85,7 @@ export interface FileRoutesByFullPath {
   '/evidence/methods': typeof EvidenceMethodsRoute
   '/programmes/$slug': typeof ProgrammesSlugRoute
   '/evidence/': typeof EvidenceIndexRoute
+  '/ladder/': typeof LadderIndexRoute
   '/programmes/': typeof ProgrammesIndexRoute
   '/evidence/publications/$slug': typeof EvidencePublicationsSlugRoute
   '/evidence/trackers/$slug': typeof EvidenceTrackersSlugRoute
@@ -91,6 +98,7 @@ export interface FileRoutesByTo {
   '/evidence/methods': typeof EvidenceMethodsRoute
   '/programmes/$slug': typeof ProgrammesSlugRoute
   '/evidence': typeof EvidenceIndexRoute
+  '/ladder': typeof LadderIndexRoute
   '/programmes': typeof ProgrammesIndexRoute
   '/evidence/publications/$slug': typeof EvidencePublicationsSlugRoute
   '/evidence/trackers/$slug': typeof EvidenceTrackersSlugRoute
@@ -104,6 +112,7 @@ export interface FileRoutesById {
   '/evidence/methods': typeof EvidenceMethodsRoute
   '/programmes/$slug': typeof ProgrammesSlugRoute
   '/evidence/': typeof EvidenceIndexRoute
+  '/ladder/': typeof LadderIndexRoute
   '/programmes/': typeof ProgrammesIndexRoute
   '/evidence/publications/$slug': typeof EvidencePublicationsSlugRoute
   '/evidence/trackers/$slug': typeof EvidenceTrackersSlugRoute
@@ -118,6 +127,7 @@ export interface FileRouteTypes {
     | '/evidence/methods'
     | '/programmes/$slug'
     | '/evidence/'
+    | '/ladder/'
     | '/programmes/'
     | '/evidence/publications/$slug'
     | '/evidence/trackers/$slug'
@@ -130,6 +140,7 @@ export interface FileRouteTypes {
     | '/evidence/methods'
     | '/programmes/$slug'
     | '/evidence'
+    | '/ladder'
     | '/programmes'
     | '/evidence/publications/$slug'
     | '/evidence/trackers/$slug'
@@ -142,6 +153,7 @@ export interface FileRouteTypes {
     | '/evidence/methods'
     | '/programmes/$slug'
     | '/evidence/'
+    | '/ladder/'
     | '/programmes/'
     | '/evidence/publications/$slug'
     | '/evidence/trackers/$slug'
@@ -155,6 +167,7 @@ export interface RootRouteChildren {
   EvidenceMethodsRoute: typeof EvidenceMethodsRoute
   ProgrammesSlugRoute: typeof ProgrammesSlugRoute
   EvidenceIndexRoute: typeof EvidenceIndexRoute
+  LadderIndexRoute: typeof LadderIndexRoute
   ProgrammesIndexRoute: typeof ProgrammesIndexRoute
   EvidencePublicationsSlugRoute: typeof EvidencePublicationsSlugRoute
   EvidenceTrackersSlugRoute: typeof EvidenceTrackersSlugRoute
@@ -190,6 +203,13 @@ declare module '@tanstack/react-router' {
       path: '/evidence/methods'
       fullPath: '/evidence/methods'
       preLoaderRoute: typeof EvidenceMethodsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ladder/': {
+      id: '/ladder/'
+      path: '/ladder'
+      fullPath: '/ladder/'
+      preLoaderRoute: typeof LadderIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/programmes/': {
@@ -243,6 +263,7 @@ const rootRouteChildren: RootRouteChildren = {
   EvidenceMethodsRoute: EvidenceMethodsRoute,
   ProgrammesSlugRoute: ProgrammesSlugRoute,
   EvidenceIndexRoute: EvidenceIndexRoute,
+  LadderIndexRoute: LadderIndexRoute,
   ProgrammesIndexRoute: ProgrammesIndexRoute,
   EvidencePublicationsSlugRoute: EvidencePublicationsSlugRoute,
   EvidenceTrackersSlugRoute: EvidenceTrackersSlugRoute,
