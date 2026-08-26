@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as EvidenceIndexRouteImport } from './routes/evidence.index'
 import { Route as EvidenceCorrectionsRouteImport } from './routes/evidence.corrections'
 import { Route as EvidenceMethodsRouteImport } from './routes/evidence.methods'
+import { Route as ProgrammesIndexRouteImport } from './routes/programmes.index'
 import { Route as EvidencePublicationsIndexRouteImport } from './routes/evidence.publications.index'
 import { Route as EvidencePublicationsSlugRouteImport } from './routes/evidence.publications.$slug'
 import { Route as EvidenceTrackersIndexRouteImport } from './routes/evidence.trackers.index'
@@ -36,6 +37,11 @@ const EvidenceCorrectionsRoute = EvidenceCorrectionsRouteImport.update({
 const EvidenceMethodsRoute = EvidenceMethodsRouteImport.update({
   id: '/evidence/methods',
   path: '/evidence/methods',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProgrammesIndexRoute = ProgrammesIndexRouteImport.update({
+  id: '/programmes/',
+  path: '/programmes/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EvidencePublicationsIndexRoute =
@@ -66,6 +72,7 @@ export interface FileRoutesByFullPath {
   '/evidence/corrections': typeof EvidenceCorrectionsRoute
   '/evidence/methods': typeof EvidenceMethodsRoute
   '/evidence/': typeof EvidenceIndexRoute
+  '/programmes/': typeof ProgrammesIndexRoute
   '/evidence/publications/$slug': typeof EvidencePublicationsSlugRoute
   '/evidence/trackers/$slug': typeof EvidenceTrackersSlugRoute
   '/evidence/publications/': typeof EvidencePublicationsIndexRoute
@@ -76,6 +83,7 @@ export interface FileRoutesByTo {
   '/evidence/corrections': typeof EvidenceCorrectionsRoute
   '/evidence/methods': typeof EvidenceMethodsRoute
   '/evidence': typeof EvidenceIndexRoute
+  '/programmes': typeof ProgrammesIndexRoute
   '/evidence/publications/$slug': typeof EvidencePublicationsSlugRoute
   '/evidence/trackers/$slug': typeof EvidenceTrackersSlugRoute
   '/evidence/publications': typeof EvidencePublicationsIndexRoute
@@ -87,6 +95,7 @@ export interface FileRoutesById {
   '/evidence/corrections': typeof EvidenceCorrectionsRoute
   '/evidence/methods': typeof EvidenceMethodsRoute
   '/evidence/': typeof EvidenceIndexRoute
+  '/programmes/': typeof ProgrammesIndexRoute
   '/evidence/publications/$slug': typeof EvidencePublicationsSlugRoute
   '/evidence/trackers/$slug': typeof EvidenceTrackersSlugRoute
   '/evidence/publications/': typeof EvidencePublicationsIndexRoute
@@ -99,6 +108,7 @@ export interface FileRouteTypes {
     | '/evidence/corrections'
     | '/evidence/methods'
     | '/evidence/'
+    | '/programmes/'
     | '/evidence/publications/$slug'
     | '/evidence/trackers/$slug'
     | '/evidence/publications/'
@@ -109,6 +119,7 @@ export interface FileRouteTypes {
     | '/evidence/corrections'
     | '/evidence/methods'
     | '/evidence'
+    | '/programmes'
     | '/evidence/publications/$slug'
     | '/evidence/trackers/$slug'
     | '/evidence/publications'
@@ -119,6 +130,7 @@ export interface FileRouteTypes {
     | '/evidence/corrections'
     | '/evidence/methods'
     | '/evidence/'
+    | '/programmes/'
     | '/evidence/publications/$slug'
     | '/evidence/trackers/$slug'
     | '/evidence/publications/'
@@ -130,6 +142,7 @@ export interface RootRouteChildren {
   EvidenceCorrectionsRoute: typeof EvidenceCorrectionsRoute
   EvidenceMethodsRoute: typeof EvidenceMethodsRoute
   EvidenceIndexRoute: typeof EvidenceIndexRoute
+  ProgrammesIndexRoute: typeof ProgrammesIndexRoute
   EvidencePublicationsSlugRoute: typeof EvidencePublicationsSlugRoute
   EvidenceTrackersSlugRoute: typeof EvidenceTrackersSlugRoute
   EvidencePublicationsIndexRoute: typeof EvidencePublicationsIndexRoute
@@ -164,6 +177,13 @@ declare module '@tanstack/react-router' {
       path: '/evidence/methods'
       fullPath: '/evidence/methods'
       preLoaderRoute: typeof EvidenceMethodsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/programmes/': {
+      id: '/programmes/'
+      path: '/programmes'
+      fullPath: '/programmes/'
+      preLoaderRoute: typeof ProgrammesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/evidence/publications/': {
@@ -202,6 +222,7 @@ const rootRouteChildren: RootRouteChildren = {
   EvidenceCorrectionsRoute: EvidenceCorrectionsRoute,
   EvidenceMethodsRoute: EvidenceMethodsRoute,
   EvidenceIndexRoute: EvidenceIndexRoute,
+  ProgrammesIndexRoute: ProgrammesIndexRoute,
   EvidencePublicationsSlugRoute: EvidencePublicationsSlugRoute,
   EvidenceTrackersSlugRoute: EvidenceTrackersSlugRoute,
   EvidencePublicationsIndexRoute: EvidencePublicationsIndexRoute,
