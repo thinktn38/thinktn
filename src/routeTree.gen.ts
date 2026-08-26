@@ -14,6 +14,7 @@ import { Route as EvidenceIndexRouteImport } from './routes/evidence.index'
 import { Route as EvidenceCorrectionsRouteImport } from './routes/evidence.corrections'
 import { Route as EvidenceMethodsRouteImport } from './routes/evidence.methods'
 import { Route as ProgrammesIndexRouteImport } from './routes/programmes.index'
+import { Route as ProgrammesSlugRouteImport } from './routes/programmes.$slug'
 import { Route as EvidencePublicationsIndexRouteImport } from './routes/evidence.publications.index'
 import { Route as EvidencePublicationsSlugRouteImport } from './routes/evidence.publications.$slug'
 import { Route as EvidenceTrackersIndexRouteImport } from './routes/evidence.trackers.index'
@@ -44,6 +45,11 @@ const ProgrammesIndexRoute = ProgrammesIndexRouteImport.update({
   path: '/programmes/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProgrammesSlugRoute = ProgrammesSlugRouteImport.update({
+  id: '/programmes/$slug',
+  path: '/programmes/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EvidencePublicationsIndexRoute =
   EvidencePublicationsIndexRouteImport.update({
     id: '/evidence/publications/',
@@ -71,6 +77,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/evidence/corrections': typeof EvidenceCorrectionsRoute
   '/evidence/methods': typeof EvidenceMethodsRoute
+  '/programmes/$slug': typeof ProgrammesSlugRoute
   '/evidence/': typeof EvidenceIndexRoute
   '/programmes/': typeof ProgrammesIndexRoute
   '/evidence/publications/$slug': typeof EvidencePublicationsSlugRoute
@@ -82,6 +89,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/evidence/corrections': typeof EvidenceCorrectionsRoute
   '/evidence/methods': typeof EvidenceMethodsRoute
+  '/programmes/$slug': typeof ProgrammesSlugRoute
   '/evidence': typeof EvidenceIndexRoute
   '/programmes': typeof ProgrammesIndexRoute
   '/evidence/publications/$slug': typeof EvidencePublicationsSlugRoute
@@ -94,6 +102,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/evidence/corrections': typeof EvidenceCorrectionsRoute
   '/evidence/methods': typeof EvidenceMethodsRoute
+  '/programmes/$slug': typeof ProgrammesSlugRoute
   '/evidence/': typeof EvidenceIndexRoute
   '/programmes/': typeof ProgrammesIndexRoute
   '/evidence/publications/$slug': typeof EvidencePublicationsSlugRoute
@@ -107,6 +116,7 @@ export interface FileRouteTypes {
     | '/'
     | '/evidence/corrections'
     | '/evidence/methods'
+    | '/programmes/$slug'
     | '/evidence/'
     | '/programmes/'
     | '/evidence/publications/$slug'
@@ -118,6 +128,7 @@ export interface FileRouteTypes {
     | '/'
     | '/evidence/corrections'
     | '/evidence/methods'
+    | '/programmes/$slug'
     | '/evidence'
     | '/programmes'
     | '/evidence/publications/$slug'
@@ -129,6 +140,7 @@ export interface FileRouteTypes {
     | '/'
     | '/evidence/corrections'
     | '/evidence/methods'
+    | '/programmes/$slug'
     | '/evidence/'
     | '/programmes/'
     | '/evidence/publications/$slug'
@@ -141,6 +153,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   EvidenceCorrectionsRoute: typeof EvidenceCorrectionsRoute
   EvidenceMethodsRoute: typeof EvidenceMethodsRoute
+  ProgrammesSlugRoute: typeof ProgrammesSlugRoute
   EvidenceIndexRoute: typeof EvidenceIndexRoute
   ProgrammesIndexRoute: typeof ProgrammesIndexRoute
   EvidencePublicationsSlugRoute: typeof EvidencePublicationsSlugRoute
@@ -186,6 +199,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProgrammesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/programmes/$slug': {
+      id: '/programmes/$slug'
+      path: '/programmes/$slug'
+      fullPath: '/programmes/$slug'
+      preLoaderRoute: typeof ProgrammesSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/evidence/publications/': {
       id: '/evidence/publications/'
       path: '/evidence/publications'
@@ -221,6 +241,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   EvidenceCorrectionsRoute: EvidenceCorrectionsRoute,
   EvidenceMethodsRoute: EvidenceMethodsRoute,
+  ProgrammesSlugRoute: ProgrammesSlugRoute,
   EvidenceIndexRoute: EvidenceIndexRoute,
   ProgrammesIndexRoute: ProgrammesIndexRoute,
   EvidencePublicationsSlugRoute: EvidencePublicationsSlugRoute,
