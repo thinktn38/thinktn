@@ -23,6 +23,21 @@ import {
 } from "@/lib/site";
 
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Think TN Foundation — evidence you can check" },
+      {
+        name: "description",
+        content:
+          "An independent Tamil Nadu policy institution. Every figure carries a confidence tag, an as-at date and a source — including the ones about us.",
+      },
+      { property: "og:title", content: "Think TN Foundation — evidence you can check" },
+      {
+        property: "og:description",
+        content: "Trackers, corrections and funding, all published. Including the ones about us.",
+      },
+    ],
+  }),
   component: Home,
 });
 
