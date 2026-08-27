@@ -25,7 +25,6 @@ function PrivacyPage() {
         label="Legal · Privacy notice"
         title="We measure Tamil Nadu. We do not measure you."
         standfirst="An institution that asks to be trusted with public data should be sparing with private data. This notice is short because the practice is."
-        asAt
       />
 
       <section className="surface-cream">

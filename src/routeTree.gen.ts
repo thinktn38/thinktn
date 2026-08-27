@@ -10,7 +10,11 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AccessibilityRouteImport } from './routes/accessibility'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as TaRouteImport } from './routes/ta'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as AboutIndexRouteImport } from './routes/about.index'
 import { Route as AboutBoardRouteImport } from './routes/about.board'
 import { Route as AboutFundingRouteImport } from './routes/about.funding'
@@ -38,9 +42,29 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AccessibilityRoute = AccessibilityRouteImport.update({
+  id: '/accessibility',
+  path: '/accessibility',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TaRoute = TaRouteImport.update({
+  id: '/ta',
+  path: '/ta',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutIndexRoute = AboutIndexRouteImport.update({
@@ -153,7 +177,11 @@ const EvidenceTrackersSlugRoute = EvidenceTrackersSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/accessibility': typeof AccessibilityRoute
   '/contact': typeof ContactRoute
+  '/privacy': typeof PrivacyRoute
+  '/ta': typeof TaRoute
+  '/terms': typeof TermsRoute
   '/about/board': typeof AboutBoardRoute
   '/about/funding': typeof AboutFundingRoute
   '/about/governance': typeof AboutGovernanceRoute
@@ -178,7 +206,11 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/accessibility': typeof AccessibilityRoute
   '/contact': typeof ContactRoute
+  '/privacy': typeof PrivacyRoute
+  '/ta': typeof TaRoute
+  '/terms': typeof TermsRoute
   '/about/board': typeof AboutBoardRoute
   '/about/funding': typeof AboutFundingRoute
   '/about/governance': typeof AboutGovernanceRoute
@@ -204,7 +236,11 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/accessibility': typeof AccessibilityRoute
   '/contact': typeof ContactRoute
+  '/privacy': typeof PrivacyRoute
+  '/ta': typeof TaRoute
+  '/terms': typeof TermsRoute
   '/about/board': typeof AboutBoardRoute
   '/about/funding': typeof AboutFundingRoute
   '/about/governance': typeof AboutGovernanceRoute
@@ -231,7 +267,11 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/accessibility'
     | '/contact'
+    | '/privacy'
+    | '/ta'
+    | '/terms'
     | '/about/board'
     | '/about/funding'
     | '/about/governance'
@@ -256,7 +296,11 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/accessibility'
     | '/contact'
+    | '/privacy'
+    | '/ta'
+    | '/terms'
     | '/about/board'
     | '/about/funding'
     | '/about/governance'
@@ -281,7 +325,11 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/accessibility'
     | '/contact'
+    | '/privacy'
+    | '/ta'
+    | '/terms'
     | '/about/board'
     | '/about/funding'
     | '/about/governance'
@@ -307,7 +355,11 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AccessibilityRoute: typeof AccessibilityRoute
   ContactRoute: typeof ContactRoute
+  PrivacyRoute: typeof PrivacyRoute
+  TaRoute: typeof TaRoute
+  TermsRoute: typeof TermsRoute
   AboutBoardRoute: typeof AboutBoardRoute
   AboutFundingRoute: typeof AboutFundingRoute
   AboutGovernanceRoute: typeof AboutGovernanceRoute
@@ -340,11 +392,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/accessibility': {
+      id: '/accessibility'
+      path: '/accessibility'
+      fullPath: '/accessibility'
+      preLoaderRoute: typeof AccessibilityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contact': {
       id: '/contact'
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ta': {
+      id: '/ta'
+      path: '/ta'
+      fullPath: '/ta'
+      preLoaderRoute: typeof TaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about/': {
@@ -499,7 +579,11 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AccessibilityRoute: AccessibilityRoute,
   ContactRoute: ContactRoute,
+  PrivacyRoute: PrivacyRoute,
+  TaRoute: TaRoute,
+  TermsRoute: TermsRoute,
   AboutBoardRoute: AboutBoardRoute,
   AboutFundingRoute: AboutFundingRoute,
   AboutGovernanceRoute: AboutGovernanceRoute,
