@@ -26,7 +26,7 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
-  const lead = TRACKERS[0];
+  const lead = TRACKERS[0]!;
 
   return (
     <>
