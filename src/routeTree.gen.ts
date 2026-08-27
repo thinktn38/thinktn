@@ -10,7 +10,11 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutIndexRouteImport } from './routes/about.index'
+import { Route as AboutBoardRouteImport } from './routes/about.board'
+import { Route as AboutResearchLeadershipRouteImport } from './routes/about.research-leadership'
 import { Route as ConveningIndexRouteImport } from './routes/convening.index'
+import { Route as ConveningSlugRouteImport } from './routes/convening.$slug'
 import { Route as EvidenceIndexRouteImport } from './routes/evidence.index'
 import { Route as EvidenceCorrectionsRouteImport } from './routes/evidence.corrections'
 import { Route as EvidenceMethodsRouteImport } from './routes/evidence.methods'
@@ -28,9 +32,29 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutIndexRoute = AboutIndexRouteImport.update({
+  id: '/about/',
+  path: '/about/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutBoardRoute = AboutBoardRouteImport.update({
+  id: '/about/board',
+  path: '/about/board',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutResearchLeadershipRoute = AboutResearchLeadershipRouteImport.update({
+  id: '/about/research-leadership',
+  path: '/about/research-leadership',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ConveningIndexRoute = ConveningIndexRouteImport.update({
   id: '/convening/',
   path: '/convening/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConveningSlugRoute = ConveningSlugRouteImport.update({
+  id: '/convening/$slug',
+  path: '/convening/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EvidenceIndexRoute = EvidenceIndexRouteImport.update({
@@ -93,10 +117,14 @@ const EvidenceTrackersSlugRoute = EvidenceTrackersSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about/board': typeof AboutBoardRoute
+  '/about/research-leadership': typeof AboutResearchLeadershipRoute
+  '/convening/$slug': typeof ConveningSlugRoute
   '/evidence/corrections': typeof EvidenceCorrectionsRoute
   '/evidence/methods': typeof EvidenceMethodsRoute
   '/ladder/$slug': typeof LadderSlugRoute
   '/programmes/$slug': typeof ProgrammesSlugRoute
+  '/about/': typeof AboutIndexRoute
   '/convening/': typeof ConveningIndexRoute
   '/evidence/': typeof EvidenceIndexRoute
   '/ladder/': typeof LadderIndexRoute
@@ -108,10 +136,14 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about/board': typeof AboutBoardRoute
+  '/about/research-leadership': typeof AboutResearchLeadershipRoute
+  '/convening/$slug': typeof ConveningSlugRoute
   '/evidence/corrections': typeof EvidenceCorrectionsRoute
   '/evidence/methods': typeof EvidenceMethodsRoute
   '/ladder/$slug': typeof LadderSlugRoute
   '/programmes/$slug': typeof ProgrammesSlugRoute
+  '/about': typeof AboutIndexRoute
   '/convening': typeof ConveningIndexRoute
   '/evidence': typeof EvidenceIndexRoute
   '/ladder': typeof LadderIndexRoute
@@ -124,10 +156,14 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about/board': typeof AboutBoardRoute
+  '/about/research-leadership': typeof AboutResearchLeadershipRoute
+  '/convening/$slug': typeof ConveningSlugRoute
   '/evidence/corrections': typeof EvidenceCorrectionsRoute
   '/evidence/methods': typeof EvidenceMethodsRoute
   '/ladder/$slug': typeof LadderSlugRoute
   '/programmes/$slug': typeof ProgrammesSlugRoute
+  '/about/': typeof AboutIndexRoute
   '/convening/': typeof ConveningIndexRoute
   '/evidence/': typeof EvidenceIndexRoute
   '/ladder/': typeof LadderIndexRoute
@@ -141,10 +177,14 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/about/board'
+    | '/about/research-leadership'
+    | '/convening/$slug'
     | '/evidence/corrections'
     | '/evidence/methods'
     | '/ladder/$slug'
     | '/programmes/$slug'
+    | '/about/'
     | '/convening/'
     | '/evidence/'
     | '/ladder/'
@@ -156,10 +196,14 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/about/board'
+    | '/about/research-leadership'
+    | '/convening/$slug'
     | '/evidence/corrections'
     | '/evidence/methods'
     | '/ladder/$slug'
     | '/programmes/$slug'
+    | '/about'
     | '/convening'
     | '/evidence'
     | '/ladder'
@@ -171,10 +215,14 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/about/board'
+    | '/about/research-leadership'
+    | '/convening/$slug'
     | '/evidence/corrections'
     | '/evidence/methods'
     | '/ladder/$slug'
     | '/programmes/$slug'
+    | '/about/'
     | '/convening/'
     | '/evidence/'
     | '/ladder/'
@@ -187,10 +235,14 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutBoardRoute: typeof AboutBoardRoute
+  AboutResearchLeadershipRoute: typeof AboutResearchLeadershipRoute
+  ConveningSlugRoute: typeof ConveningSlugRoute
   EvidenceCorrectionsRoute: typeof EvidenceCorrectionsRoute
   EvidenceMethodsRoute: typeof EvidenceMethodsRoute
   LadderSlugRoute: typeof LadderSlugRoute
   ProgrammesSlugRoute: typeof ProgrammesSlugRoute
+  AboutIndexRoute: typeof AboutIndexRoute
   ConveningIndexRoute: typeof ConveningIndexRoute
   EvidenceIndexRoute: typeof EvidenceIndexRoute
   LadderIndexRoute: typeof LadderIndexRoute
@@ -210,11 +262,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about/': {
+      id: '/about/'
+      path: '/about'
+      fullPath: '/about/'
+      preLoaderRoute: typeof AboutIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about/board': {
+      id: '/about/board'
+      path: '/about/board'
+      fullPath: '/about/board'
+      preLoaderRoute: typeof AboutBoardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about/research-leadership': {
+      id: '/about/research-leadership'
+      path: '/about/research-leadership'
+      fullPath: '/about/research-leadership'
+      preLoaderRoute: typeof AboutResearchLeadershipRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/convening/': {
       id: '/convening/'
       path: '/convening'
       fullPath: '/convening/'
       preLoaderRoute: typeof ConveningIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/convening/$slug': {
+      id: '/convening/$slug'
+      path: '/convening/$slug'
+      fullPath: '/convening/$slug'
+      preLoaderRoute: typeof ConveningSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/evidence/': {
@@ -299,10 +379,14 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutBoardRoute: AboutBoardRoute,
+  AboutResearchLeadershipRoute: AboutResearchLeadershipRoute,
+  ConveningSlugRoute: ConveningSlugRoute,
   EvidenceCorrectionsRoute: EvidenceCorrectionsRoute,
   EvidenceMethodsRoute: EvidenceMethodsRoute,
   LadderSlugRoute: LadderSlugRoute,
   ProgrammesSlugRoute: ProgrammesSlugRoute,
+  AboutIndexRoute: AboutIndexRoute,
   ConveningIndexRoute: ConveningIndexRoute,
   EvidenceIndexRoute: EvidenceIndexRoute,
   LadderIndexRoute: LadderIndexRoute,
