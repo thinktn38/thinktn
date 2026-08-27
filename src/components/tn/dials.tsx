@@ -97,7 +97,7 @@ const DIALS: DialSpec[] = [
   },
 ];
 
-function Ticks({ count, rev, dur }: { count: number; rev?: boolean; dur: number }) {
+function Ticks({ count, rev, dur }: { count: number; rev?: boolean | undefined; dur: number }) {
   const ticks = Array.from({ length: count }, (_, i) => (i * 360) / count);
   return (
     <g
