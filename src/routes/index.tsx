@@ -86,6 +86,23 @@ function Home() {
         <GradientRule />
       </section>
 
+      {/* ------------------------------------------------------- pillar dials */}
+      <section className="surface-night">
+        <div className="u-container u-section">
+          <div className="flex flex-wrap items-end justify-between gap-6">
+            <div>
+              <SectionLabel>The institution, in five motions</SectionLabel>
+              <h2 className="u-h1 mt-6 max-w-2xl">
+                Everything we do turns on evidence.
+                <span className="u-signature"> Pick a dial.</span>
+              </h2>
+            </div>
+          </div>
+          <PillarDials className="mt-14" />
+        </div>
+        <GradientRule />
+      </section>
+
       {/* --------------------------------------------------------- tag legend */}
       <section className="surface-cream">
         <div className="u-container u-section">
