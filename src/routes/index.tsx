@@ -11,6 +11,7 @@ import {
   TagChip,
 } from "@/components/tn/primitives";
 import { SeriesChart } from "@/components/tn/chart";
+import { PillarDials } from "@/components/tn/dials";
 import {
   CORRECTIONS,
   CORRECTIONS_STAT,
