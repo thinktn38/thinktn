@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { KeyValue, PageHeader, Prose, SectionLabel, TagChip } from "@/components/tn/primitives";
+import { KeyValue, PageHeader, Prose, SectionLabel } from "@/components/tn/primitives";
 import { CtaBand } from "@/components/tn/site-chrome";
 import { BOARD, TELOS_COUNCIL } from "@/lib/site";
 

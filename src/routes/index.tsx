@@ -11,6 +11,7 @@ import {
   TagChip,
 } from "@/components/tn/primitives";
 import { SeriesChart } from "@/components/tn/chart";
+import { PillarDials } from "@/components/tn/dials";
 import {
   CORRECTIONS,
   CORRECTIONS_STAT,
@@ -22,11 +23,26 @@ import {
 } from "@/lib/site";
 
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Think TN Foundation — evidence you can check" },
+      {
+        name: "description",
+        content:
+          "An independent Tamil Nadu policy institution. Every figure carries a confidence tag, an as-at date and a source — including the ones about us.",
+      },
+      { property: "og:title", content: "Think TN Foundation — evidence you can check" },
+      {
+        property: "og:description",
+        content: "Trackers, corrections and funding, all published. Including the ones about us.",
+      },
+    ],
+  }),
   component: Home,
 });
 
 function Home() {
-  const lead = TRACKERS[0];
+  const lead = TRACKERS[0]!;
 
   return (
     <>
@@ -82,6 +98,23 @@ function Home() {
               tone="outline"
             />
           </div>
+        </div>
+        <GradientRule />
+      </section>
+
+      {/* ------------------------------------------------------- pillar dials */}
+      <section className="surface-night">
+        <div className="u-container u-section">
+          <div className="flex flex-wrap items-end justify-between gap-6">
+            <div>
+              <SectionLabel>The institution, in five motions</SectionLabel>
+              <h2 className="u-h1 mt-6 max-w-2xl">
+                Everything we do turns on evidence.
+                <span className="u-signature"> Pick a dial.</span>
+              </h2>
+            </div>
+          </div>
+          <PillarDials className="mt-14" />
         </div>
         <GradientRule />
       </section>

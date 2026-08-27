@@ -530,3 +530,23 @@
     font-size: 10px;
   }
 }
+
+/* Pillar dials — the brand motion element. Decorative; still when reduced motion. */
+@keyframes tn-dial-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.tn-dial-rot {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: tn-dial-spin linear infinite;
+}
+.tn-dial-rot-rev {
+  animation-direction: reverse;
+}
+@media (prefers-reduced-motion: reduce) {
+  .tn-dial-rot {
+    animation: none;
+  }
+}

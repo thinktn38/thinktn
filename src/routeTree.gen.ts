@@ -10,6 +10,11 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AccessibilityRouteImport } from './routes/accessibility'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as TaRouteImport } from './routes/ta'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as AboutIndexRouteImport } from './routes/about.index'
 import { Route as AboutBoardRouteImport } from './routes/about.board'
 import { Route as AboutFundingRouteImport } from './routes/about.funding'
@@ -24,6 +29,7 @@ import { Route as EvidenceMethodsRouteImport } from './routes/evidence.methods'
 import { Route as LadderIndexRouteImport } from './routes/ladder.index'
 import { Route as LadderSlugRouteImport } from './routes/ladder.$slug'
 import { Route as NewsIndexRouteImport } from './routes/news.index'
+import { Route as NewsSlugRouteImport } from './routes/news.$slug'
 import { Route as ProgrammesIndexRouteImport } from './routes/programmes.index'
 import { Route as ProgrammesSlugRouteImport } from './routes/programmes.$slug'
 import { Route as EvidencePublicationsIndexRouteImport } from './routes/evidence.publications.index'
@@ -34,6 +40,31 @@ import { Route as EvidenceTrackersSlugRouteImport } from './routes/evidence.trac
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AccessibilityRoute = AccessibilityRouteImport.update({
+  id: '/accessibility',
+  path: '/accessibility',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TaRoute = TaRouteImport.update({
+  id: '/ta',
+  path: '/ta',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutIndexRoute = AboutIndexRouteImport.update({
@@ -106,6 +137,11 @@ const NewsIndexRoute = NewsIndexRouteImport.update({
   path: '/news/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const NewsSlugRoute = NewsSlugRouteImport.update({
+  id: '/news/$slug',
+  path: '/news/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProgrammesIndexRoute = ProgrammesIndexRouteImport.update({
   id: '/programmes/',
   path: '/programmes/',
@@ -141,6 +177,11 @@ const EvidenceTrackersSlugRoute = EvidenceTrackersSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/accessibility': typeof AccessibilityRoute
+  '/contact': typeof ContactRoute
+  '/privacy': typeof PrivacyRoute
+  '/ta': typeof TaRoute
+  '/terms': typeof TermsRoute
   '/about/board': typeof AboutBoardRoute
   '/about/funding': typeof AboutFundingRoute
   '/about/governance': typeof AboutGovernanceRoute
@@ -150,6 +191,7 @@ export interface FileRoutesByFullPath {
   '/evidence/corrections': typeof EvidenceCorrectionsRoute
   '/evidence/methods': typeof EvidenceMethodsRoute
   '/ladder/$slug': typeof LadderSlugRoute
+  '/news/$slug': typeof NewsSlugRoute
   '/programmes/$slug': typeof ProgrammesSlugRoute
   '/about/': typeof AboutIndexRoute
   '/convening/': typeof ConveningIndexRoute
@@ -164,6 +206,11 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/accessibility': typeof AccessibilityRoute
+  '/contact': typeof ContactRoute
+  '/privacy': typeof PrivacyRoute
+  '/ta': typeof TaRoute
+  '/terms': typeof TermsRoute
   '/about/board': typeof AboutBoardRoute
   '/about/funding': typeof AboutFundingRoute
   '/about/governance': typeof AboutGovernanceRoute
@@ -173,6 +220,7 @@ export interface FileRoutesByTo {
   '/evidence/corrections': typeof EvidenceCorrectionsRoute
   '/evidence/methods': typeof EvidenceMethodsRoute
   '/ladder/$slug': typeof LadderSlugRoute
+  '/news/$slug': typeof NewsSlugRoute
   '/programmes/$slug': typeof ProgrammesSlugRoute
   '/about': typeof AboutIndexRoute
   '/convening': typeof ConveningIndexRoute
@@ -188,6 +236,11 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/accessibility': typeof AccessibilityRoute
+  '/contact': typeof ContactRoute
+  '/privacy': typeof PrivacyRoute
+  '/ta': typeof TaRoute
+  '/terms': typeof TermsRoute
   '/about/board': typeof AboutBoardRoute
   '/about/funding': typeof AboutFundingRoute
   '/about/governance': typeof AboutGovernanceRoute
@@ -197,6 +250,7 @@ export interface FileRoutesById {
   '/evidence/corrections': typeof EvidenceCorrectionsRoute
   '/evidence/methods': typeof EvidenceMethodsRoute
   '/ladder/$slug': typeof LadderSlugRoute
+  '/news/$slug': typeof NewsSlugRoute
   '/programmes/$slug': typeof ProgrammesSlugRoute
   '/about/': typeof AboutIndexRoute
   '/convening/': typeof ConveningIndexRoute
@@ -213,6 +267,11 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/accessibility'
+    | '/contact'
+    | '/privacy'
+    | '/ta'
+    | '/terms'
     | '/about/board'
     | '/about/funding'
     | '/about/governance'
@@ -222,6 +281,7 @@ export interface FileRouteTypes {
     | '/evidence/corrections'
     | '/evidence/methods'
     | '/ladder/$slug'
+    | '/news/$slug'
     | '/programmes/$slug'
     | '/about/'
     | '/convening/'
@@ -236,6 +296,11 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/accessibility'
+    | '/contact'
+    | '/privacy'
+    | '/ta'
+    | '/terms'
     | '/about/board'
     | '/about/funding'
     | '/about/governance'
@@ -245,6 +310,7 @@ export interface FileRouteTypes {
     | '/evidence/corrections'
     | '/evidence/methods'
     | '/ladder/$slug'
+    | '/news/$slug'
     | '/programmes/$slug'
     | '/about'
     | '/convening'
@@ -259,6 +325,11 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/accessibility'
+    | '/contact'
+    | '/privacy'
+    | '/ta'
+    | '/terms'
     | '/about/board'
     | '/about/funding'
     | '/about/governance'
@@ -268,6 +339,7 @@ export interface FileRouteTypes {
     | '/evidence/corrections'
     | '/evidence/methods'
     | '/ladder/$slug'
+    | '/news/$slug'
     | '/programmes/$slug'
     | '/about/'
     | '/convening/'
@@ -283,6 +355,11 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AccessibilityRoute: typeof AccessibilityRoute
+  ContactRoute: typeof ContactRoute
+  PrivacyRoute: typeof PrivacyRoute
+  TaRoute: typeof TaRoute
+  TermsRoute: typeof TermsRoute
   AboutBoardRoute: typeof AboutBoardRoute
   AboutFundingRoute: typeof AboutFundingRoute
   AboutGovernanceRoute: typeof AboutGovernanceRoute
@@ -292,6 +369,7 @@ export interface RootRouteChildren {
   EvidenceCorrectionsRoute: typeof EvidenceCorrectionsRoute
   EvidenceMethodsRoute: typeof EvidenceMethodsRoute
   LadderSlugRoute: typeof LadderSlugRoute
+  NewsSlugRoute: typeof NewsSlugRoute
   ProgrammesSlugRoute: typeof ProgrammesSlugRoute
   AboutIndexRoute: typeof AboutIndexRoute
   ConveningIndexRoute: typeof ConveningIndexRoute
@@ -312,6 +390,41 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/accessibility': {
+      id: '/accessibility'
+      path: '/accessibility'
+      fullPath: '/accessibility'
+      preLoaderRoute: typeof AccessibilityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ta': {
+      id: '/ta'
+      path: '/ta'
+      fullPath: '/ta'
+      preLoaderRoute: typeof TaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about/': {
@@ -412,6 +525,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NewsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/news/$slug': {
+      id: '/news/$slug'
+      path: '/news/$slug'
+      fullPath: '/news/$slug'
+      preLoaderRoute: typeof NewsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/programmes/': {
       id: '/programmes/'
       path: '/programmes'
@@ -459,6 +579,11 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AccessibilityRoute: AccessibilityRoute,
+  ContactRoute: ContactRoute,
+  PrivacyRoute: PrivacyRoute,
+  TaRoute: TaRoute,
+  TermsRoute: TermsRoute,
   AboutBoardRoute: AboutBoardRoute,
   AboutFundingRoute: AboutFundingRoute,
   AboutGovernanceRoute: AboutGovernanceRoute,
@@ -468,6 +593,7 @@ const rootRouteChildren: RootRouteChildren = {
   EvidenceCorrectionsRoute: EvidenceCorrectionsRoute,
   EvidenceMethodsRoute: EvidenceMethodsRoute,
   LadderSlugRoute: LadderSlugRoute,
+  NewsSlugRoute: NewsSlugRoute,
   ProgrammesSlugRoute: ProgrammesSlugRoute,
   AboutIndexRoute: AboutIndexRoute,
   ConveningIndexRoute: ConveningIndexRoute,
